@@ -2067,13 +2067,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      'nome': this.plate_data.nome,
-      'ingredienti': this.plate_data.ingredienti,
-      'descrizione': this.plate_data.descrizione,
-      'prezzo_cent': this.plate_data.prezzo,
-      'sconto': this.plate_data.sconto,
-      'disponibile': this.plate_data.disponibile,
-      'immagine': this.plate_data.immagine,
+      'nome': this.plate_data.plate_name,
+      'ingredienti': this.plate_data.ingredients,
+      'descrizione': this.plate_data.description,
+      'prezzo_cent': this.plate_data.price,
+      'sconto': this.plate_data.discount,
+      'disponibile': this.plate_data.availability,
+      'immagine': this.plate_data.img,
       // flags
       'display_details': false,
       //aggiungi al carrello
@@ -2087,9 +2087,9 @@ __webpack_require__.r(__webpack_exports__);
       if (descrizione.length > 100) {
         descrizione = descrizione.slice(0, 97);
         descrizione += '...';
-      }
+      } // console.log(descrizione);
 
-      console.log(descrizione);
+
       return descrizione;
     },
     prezzo_euro: function prezzo_euro() {
@@ -2119,15 +2119,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Plate mounted');
-    console.log('plate_data: ', this.plate_data);
-    console.log('nome: ', this.nome);
-    console.log('ingredienti: ', this.ingredienti);
-    console.log('descrizione: ', this.descrizione);
-    console.log('prezzo_cent: ', this.prezzo_cent);
-    console.log('sconto: ', this.sconto);
-    console.log('disponibile: ', this.disponibile);
-    console.log('immagine: ', this.immagine);
+    console.log('Plate mounted'); // console.log(this.plate_data);
   },
   props: {
     plate_data: Object
