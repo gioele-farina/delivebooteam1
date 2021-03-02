@@ -6,7 +6,7 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 
 // other
 @import 'plate';
@@ -17,11 +17,14 @@
 @import 'edit_restaurant';
 
 // nuovi file scss, commento da cencellare è solo un promemoria
-@import 'header';
-@import 'jumbotron';
+// @import 'header';
+// @import 'jumbotron';
 @import 'home';
 @import 'animations';
 
+//welcome
+@import 'welcome';
+@import 'carousel';
 
 * {
   margin: 0;
