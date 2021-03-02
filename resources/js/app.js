@@ -13,7 +13,31 @@ function  init() {
       mounted: function () {
        this.$nextTick(function () {
          console.log("App montata!");
+         this.get_all_restaurants();
        })},
+
+      data: {
+        // return {
+          restaurants: []
+        // }
+      },
+
+      computed: {
+
+      },
+
+      methods: {
+        get_all_restaurants: function(){
+
+          axios.get('http://localhost:8000/home/getallrestaurant')
+                .then(res => {
+                  this.restaurants = res.data.restaurants;
+                  // console.log(this.restaurants);
+                });
+        },
+      },
+
+
   });
 }
 

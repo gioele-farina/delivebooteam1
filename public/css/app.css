@@ -11158,6 +11158,39 @@ a.text-dark:focus {
   color: white;
 }
 
+.restaurant_container {
+  min-height: 15px;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.restaurant_container * {
+  margin: 0;
+  padding: 0;
+}
+
+.restaurant_container section {
+  border: 1px solid black;
+}
+
+.restaurant_container .img {
+  width: 260px;
+  height: 150px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.restaurant_container .description {
+  width: 260px;
+  height: 200px;
+  padding: 5px;
+}
+
+.restaurant_container .description .title {
+  font-size: 1em;
+}
+
 .container-dashboard {
   width: 100vw;
   display: flex;
