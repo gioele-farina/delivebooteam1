@@ -11034,6 +11034,7 @@ a.text-dark:focus {
 
 .plate_container .plate_detail {
   position: fixed;
+  z-index: 1000;
   width: 600px;
   height: 80vh;
   top: 5%;
