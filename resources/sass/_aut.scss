@@ -1,0 +1,26 @@
+.card {
+
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid;
+
+    input[type=text],
+    input[type=email],
+    input[type=password],
+    input[type=number]{
+        width: 100%;
+    }
+
+    .flex {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        button, a {
+            width: 50%;
+        }
+        a{
+            border: 1px solid;
+        }
+    }
+}

@@ -4,24 +4,33 @@
     header{
 
     // debug
-      background-color: $blue;
-      height: 100px;
+      // background-color: $blue;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      height: 80px;
     // end
   
     .container {
       display: flex;
       justify-content: space-between;
+      // align-items: baseline;
+      // flex-basis: auto;
       align-items: center;
+      // position: relative;
       width: 80%;
       height: 100%;
       margin: 0 auto; 
+
+      img{
+        width: 150px;
+      }
     }
   }
   
   // MAIN
   main {
     //debug
-    background-color: $red;
+    // background-color: $red;
+    padding: 20px 0;
     min-height: 500px;
     //end
   
@@ -41,6 +50,7 @@
           height: 400px;
           border: 1px solid;
           border-radius: 10px;
+          
         }
   
       }
@@ -54,6 +64,8 @@
   
     //debug
     background-color: #2e3333;
+    padding-top: 50px;
+    padding-bottom: 20px;
     min-height: 200px;
     //end
   
@@ -65,6 +77,7 @@
       nav {
         display: flex;
         justify-content: space-between;
+        padding-bottom: 20px;
         
         ul, a {  
           color: white;
