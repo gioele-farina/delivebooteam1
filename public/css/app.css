@@ -692,10 +692,14 @@ header .container img {
           user-select: none;
 }
 
+.search,
+.cart {
+  display: none;
+}
+
 .card {
   width: 500px;
   margin: 0 auto;
-  border: 1px solid;
 }
 
 .card input[type=text],
@@ -703,6 +707,7 @@ header .container img {
 .card input[type=password],
 .card input[type=number] {
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .card .flex {
