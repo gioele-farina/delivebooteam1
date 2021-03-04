@@ -1,6 +1,10 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+// Route::get('/route-name/?{name}', function(){
+//   return redirect('vue_app');
+//   })->where('name', '[A-Za-z]+'); 
 
 Route::get('/', 'Controller@index') -> name ('index');
 
