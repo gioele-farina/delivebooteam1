@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     {{-- MAIN --}}
     <main>
         
@@ -49,12 +50,12 @@
                 
                 <div class="restaurants">
                     
-                    <div class="card">info che arrivano dal db</div> <!-- foreach componente ristorante-->
-                    <div class="card">info</div>
-                    <div class="card">info</div>
-                    <div class="card">info</div>
-                    <div class="card">info</div>
-                    <div class="card">info</div>
+                    @foreach ($plates as $plate)
+                        <plate
+                        :plate_data = {{ $plate }}
+                        >
+                    </plate>
+                    @endforeach         
                     
                 </div>
             </section>
@@ -135,4 +136,5 @@
             }
         }
     </script>
+
 @endsection
