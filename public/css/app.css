@@ -692,36 +692,46 @@ header .container img {
           user-select: none;
 }
 
-.search,
-.cart {
+.container-auth .search,
+.container-auth .cart {
   display: none;
 }
 
-.card {
-  width: 500px;
+.container-auth .card {
+  max-width: 500px;
   margin: 0 auto;
 }
 
-.card input[type=text],
-.card input[type=email],
-.card input[type=password],
-.card input[type=number] {
+.container-auth .card input[type=text],
+.container-auth .card input[type=email],
+.container-auth .card input[type=password],
+.container-auth .card input[type=number] {
   width: 100%;
   margin-bottom: 20px;
 }
 
-.card .flex {
+.container-auth .card .flex {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.card .flex button,
-.card .flex a {
-  width: 50%;
+.container-auth .card .flex button,
+.container-auth .card .flex a {
+  height: 40px;
+  border-radius: 5px;
+  width: 49%;
 }
 
-.card .flex a {
+.container-auth .card .flex button:hover,
+.container-auth .card .flex a:hover {
+  background-color: yellow;
+}
+
+.container-auth .card .flex a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid;
 }
 
