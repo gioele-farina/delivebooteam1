@@ -698,7 +698,7 @@ header .container img {
 }
 
 .card {
-  width: 500px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -718,10 +718,20 @@ header .container img {
 
 .card .flex button,
 .card .flex a {
-  width: 50%;
+  height: 40px;
+  border-radius: 5px;
+  width: 49%;
+}
+
+.card .flex button:hover,
+.card .flex a:hover {
+  background-color: yellow;
 }
 
 .card .flex a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid;
 }
 
