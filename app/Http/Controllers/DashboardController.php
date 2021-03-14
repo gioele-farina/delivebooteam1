@@ -58,12 +58,29 @@ class DashboardController extends Controller
         }
 
         $current = Carbon::now();
-        $monthsAgo = $current -> subMonths(3);
         $counterPerMonth = array (0,0,0);
 
         foreach ($userOrders as $order_x) {
-            if($current -> diffInDays($order_x -> updated_at) < 90) {
+            if($current -> diffInDays($order_x -> updated_at) < 30) {
                 $counterPerMonth[0] += 1;
+            } else if ($current -> diffInDays($order_x -> updated_at) < 60) {
+                $counterPerMonth[1] += 1;
+            } else if ($current -> diffInDays($order_x -> updated_at) < 90) {
+                $counterPerMonth[2] += 1;
+            }
+        }
+
+        $total_1month = [];
+        foreach ($userOrders as $order_last) {
+            if ($current -> diffInDays($order_last -> created_at) < 30) {
+                $total_1month[] = $order_last;
+            }
+        }
+
+        $total_24h = [];
+        foreach ($userOrders as $order_24) {
+            if ($current -> diffInHours($order_24 -> created_at) < 24) {
+                $total_24h[] = $order_24;
             }
         }
 
@@ -113,9 +130,6 @@ class DashboardController extends Controller
                     [
                         'ticks' => [
                             'beginAtZero' => true,
-                            // 'max' => 100,
-                            // 'min' => 0,
-                            // 'stepSize' => 10,
                         ],
                         'stacked' => true,
                         'gridLines' => [
@@ -127,8 +141,6 @@ class DashboardController extends Controller
                     [
                         'ticks' => [
                             'beginAtZero' => true,
-                            // 'max' => 100,
-                            // 'min' => 20,
                             'stepSize' => 1,
                         ],
                         'stacked' => true,
@@ -172,16 +184,7 @@ class DashboardController extends Controller
             ],
         ]);
 
-        $smallFeedbacks = [];
-        $feedMax = 0;
-        if (count($feedbacks) > 0) {
-            while ($feedMax <= 12) {
-                $smallFeedbacks[] = $feedbacks[$feedMax];
-                $feedMax++;
-            }
-        }
-
-        return view('dashboard.dashboard-index', compact('mail_cut', 'smallFeedbacks', 'chartjsDashboard','chartjsFeedbacks', 'orders_3'));
+        return view('dashboard.dashboard-index', compact('mail_cut', 'chartjsDashboard','chartjsFeedbacks', 'orders_3', 'total_1month', 'total_24h'));
     }
 
     public function feedbackPage() {
@@ -199,6 +202,9 @@ class DashboardController extends Controller
     public function stats() {
 
         $user = Auth::user();
+        $email_user = Auth::user() -> email;
+        $word = '@';
+        $mail_cut = substr($email_user, 0, strpos($email_user, $word));
         $plates = [];
 
         foreach ($user -> plates as $plate) {
@@ -207,13 +213,13 @@ class DashboardController extends Controller
 
         $userOrdersId = [];
         foreach ($user -> plates as $plate) {
-
-        $orders = [];
-        foreach ($plate -> orders as $order) {
-            $orders[] = $order;
-            $userOrdersId[] = $order -> id;
-        }
+            $orders = [];
+            foreach ($plate -> orders as $order) {
+                $orders[] = $order;
+                $userOrdersId[] = $order -> id;
+            }
         $plateOrdersId[] = count($orders);
+        $ordersIds[] = $orders;
         }
 
         $counterFeedbacks = array (0,0,0,0,0);
@@ -232,7 +238,57 @@ class DashboardController extends Controller
             }
         }
 
-        // dd($counterFeedbacks, $plateOrdersId);
+        $userOrdersId = array_unique($userOrdersId);
+        $userOrders = Order::findOrFail($userOrdersId);
+
+        $reordered = [];
+        foreach ($userOrders as $order_item) {
+            $reordered[] = $order_item;
+        }
+
+        $monthsDatas = array (0,0,0,0,0,0,0,0,0,0,0,0);
+        $incassi = array (0,0,0,0,0,0,0,0,0,0,0,0);
+
+
+        foreach ($reordered as $orderToCount) {
+            if($orderToCount -> updated_at -> format('M') == 'Jan') {
+                $monthsDatas[0] = $monthsDatas[0] + 1;
+                $incassi[0] = $incassi[0] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'Feb') {
+                $monthsDatas[1] = $monthsDatas[1] + 1;
+                $incassi[1] = $incassi[1] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'Mar') {
+                $monthsDatas[2] = $monthsDatas[2] + 1;
+                $incassi[2] = $incassi[2] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'Apr') {
+                $monthsDatas[3] = $monthsDatas[3] + 1;
+                $incassi[3] = $incassi[3] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'May') {
+                $monthsDatas[4] = $monthsDatas[4] + 1;
+                $incassi[4] = $incassi[4] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'Jun') {
+                $monthsDatas[5] = $monthsDatas[5] + 1;
+                $incassi[5] = $incassi[5] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'Jul') {
+                $monthsDatas[6] = $monthsDatas[6] + 1;
+                $incassi[6] = $incassi[6] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'Aug') {
+                $monthsDatas[7] = $monthsDatas[7] + 1;
+                $incassi[7] = $incassi[7] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'Sep') {
+                $monthsDatas[8] = $monthsDatas[8] + 1;
+                $incassi[8] = $incassi[8] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'Oct') {
+                $monthsDatas[9] = $monthsDatas[9] + 1;
+                $incassi[9] = $incassi[9] + ($orderToCount -> total_price / 100);
+            } else if ($orderToCount -> updated_at -> format('M') == 'Nov') {
+                $monthsDatas[10] = $monthsDatas[10] + 1;
+                $incassi[10] = $incassi[10] + ($orderToCount -> total_price / 100);
+            } else {
+                $monthsDatas[11] = $monthsDatas[11] + 1;
+                $incassi[11] = $incassi[11] + ($orderToCount -> total_price / 100);
+            }
+        }
 
         $chartjs1 = app()->chartjs
         ->name('platesOrdered')
@@ -367,10 +423,32 @@ class DashboardController extends Controller
             'scale' => [
                 'ticks' => [
                     'beginAtZero' => true,
-                    'stepSize' => 15,
+                    'stepSize' => 1,
                     // 'min' => 0,
                 ],
             ],
+            'responsive' => true,
+            'legend' => [
+                'display' => true,
+            ],
+        ]);
+
+        $chartjs3 = app()->chartjs
+        ->name('last12Months')
+        ->type('line')
+        ->size(['width' => 500, 'height' => 200])
+        ->labels(['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'])
+        ->datasets([
+            [
+                "label" => "Incassi per mese",
+                'backgroundColor' => [
+                    "rgba(233, 79, 55 ,0.55)"
+                ],
+                'hoverBackgroundColor' => 'rgba(0, 204, 188, 0.51)',
+                'data' => $incassi,
+            ],
+        ])
+        ->optionsRaw([
             'responsive' => true,
             'legend' => [
                 'display' => true,
@@ -378,13 +456,33 @@ class DashboardController extends Controller
                     'fontColor' => '#000'
                 ]
             ],
+            'scales' => [
+                'xAxes' => [
+                    [
+                        'ticks' => [
+                            'beginAtZero' => true,
+                        ],
+                        'stacked' => true,
+                        'gridLines' => [
+                            'display' => true,
+                        ],
+                    ]
+                ],
+                'yAxes' => [
+                    [
+                        'ticks' => [
+                            'beginAtZero' => true,
+                            'stepSize' => 100,
+                        ],
+                        'stacked' => true,
+                        'gridLines' => [
+                            'display' => true,
+                        ],
+                    ]
+                ]
+            ]
         ]);
 
-        return view('dashboard.stats', compact('chartjs1', 'chartjs2'));
+        return view('dashboard.stats', compact('chartjs1', 'chartjs2', 'chartjs3', 'mail_cut'));
     }
-
-    // public function dashProvvisoria(){
-    //   $user = Auth::user();
-    //   return view('dashboard.dashboard-index', compact('user'));
-    // }
 }

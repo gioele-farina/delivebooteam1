@@ -51,7 +51,9 @@ class PlateController extends Controller
     }
 
     if ($data['price_cents'] == '00') {
-      $data['price_cents'] = 0;
+      $data['price_cents'] = '0';
+    } else if (substr($data['price_cents'], 0, 1) == '0' && $data['price_cents'] != '0') {
+      $data['price_cents'] = substr($data['price_cents'], 1);
     }
 
     // trasformo il prezzo da due valori ad un valore
@@ -103,7 +105,9 @@ class PlateController extends Controller
 
     $plate -> save();
 
-    return redirect() -> route('plates-index');
+    // return redirect() -> route('plates-index');
+
+    return view('prova', compact('data'));
   }
 
   public function platesEdit($id) {
@@ -131,7 +135,9 @@ class PlateController extends Controller
     }
 
     if ($data['price_cents'] == '00') {
-      $data['price_cents'] = 0;
+      $data['price_cents'] = '0';
+    } else if (substr($data['price_cents'], 0, 1) == '0' && $data['price_cents'] != '0') {
+      $data['price_cents'] = substr($data['price_cents'], 1);
     }
 
     Validator::make($data, [

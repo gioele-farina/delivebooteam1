@@ -4,7 +4,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   background-image: url("/storage/polygon.svg");
   background-size: cover;
   background-position: center bottom;
@@ -127,6 +127,7 @@
       }
     }
   }
+
   .separate-survey input{
     border-radius: 2px;
     border: 1px solid #bac3c3;
@@ -137,6 +138,7 @@
     font-size: 16px;
   }
   #submit-order-checkout{
+
     border-radius: 5px;
     border: 1px solid $color_deliveroo;
     margin-bottom: 24px;
@@ -149,6 +151,7 @@
     color: white;
   }
   #back-order-checkout{
+
     border-radius: 5px;
     border: 1px solid $discount-price;
     margin-bottom: 24px;
@@ -229,6 +232,7 @@
     .separate-survey input{
       padding: 10px 60px;
     }
+
   }
 }
 @media all and (min-width: 0px) and (max-width: 799px) {

@@ -2,8 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Deliveboo</title>
+=======
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+>>>>>>> lastpush
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Redressed&display=swap" rel="stylesheet">
@@ -41,33 +46,35 @@
 
             <div class="buttons-left-dash">
                 <div>
-                  <h4>Dashboard</h4>
+
+                  <form action="{{ route('dashboard') }}">
+                    <button class="gotodash" type="submit">
+                      Dashboard
+                    </button>
+                  </form>
+
                   <form action="{{ route('restaurant-edit') }}">
-                      <button class="btn btn-success" type="submit">
+                      <button class="btn btn-success button-dash" type="submit">
                           Modifica il tuo profilo
                           <span class="plate-color"></span><span class="plate-color"></span><span class="plate-color"></span><span class="plate-color"></span>
                       </button>
                   </form>
 
                   <form action="{{ route('plates-index') }}">
-                      <button class="btn btn-success" type="submit">
+                      <button class="btn btn-success button-dash" type="submit">
                           Visualizza i tuoi piatti
                           <span class="plate-color"></span><span class="plate-color"></span><span class="plate-color"></span><span class="plate-color"></span>
                       </button>
                   </form>
 
                   <form class="" action="{{ route('restaurant-order') }}">
-                      <button>
+                      <button button-dash>
                           Visualizza i tuoi ordini
                           <span class="order-color"></span><span class="order-color"></span><span class="order-color"></span><span class="order-color"></span>
                       </button>
                   </form>
                   <form class="" action="{{ route('stats') }}">
-                      <button
-                          @if (empty($orders_3))
-                              disabled
-                          @endif
-                      >
+                      <button class="button-dash">
                           Statistiche ordini
                           <span class="order-color"></span><span class="order-color"></span><span class="order-color"></span><span class="order-color"></span>
                       </button>
@@ -92,7 +99,7 @@
         </div>
 
         <div class="right-side-dash">
-          @include('components.header-no-search')
+          @include('components.header-logo')
           @include('components.header-dashboard-responsive')
           <section class="dashboard-content">
             @yield('dashboard-home')
@@ -102,6 +109,9 @@
             @yield('plates-edit')
             @yield('dashboard-orders')
             @yield('dashboard-comanda')
+            @yield('restaurant-edit')
+            @yield('edit-plate')
+            @yield('stats')
           </section>
         </div>
 
